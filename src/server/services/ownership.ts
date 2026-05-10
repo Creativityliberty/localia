@@ -10,6 +10,7 @@ import { getAuthenticatedClient } from "@/server/db/client";
 import { TABLES } from "@/server/db/tables";
 import { ApiError } from "@/server/http/api-error";
 import { mapBusiness, mapSite } from "@/server/db/mappers";
+import { slugify } from "@/lib/utils";
 import type { Business, Site } from "@/types/business";
 
 /**
