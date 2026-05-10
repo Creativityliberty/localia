@@ -51,9 +51,13 @@ export async function POST(req: Request) {
       const baseSlug = slugify(businessName) || "mon-commerce";
       createdSlug = `${baseSlug}-${Math.random().toString(36).slice(2, 6)}`;
       
-      // Use a server client (which has service role or admin access usually, or just direct DB access)
-      // Since we don't have a session, we use the server client as is
-      const db: any = (client as any).database ?? client;
+      // Si on a déjà un token (pas de vérification email), on l'utilise
+      // Sinon on tente en anonyme (peut échouer selon RLS)
+      const authClient = accessToken 
+        ? createInsforgeServerClient({ accessToken }) 
+        : client;
+      
+      const db: any = (authClient as any).database ?? authClient;
 
       const { error: insertError } = await db.from(TABLES.businesses).insert([
         {
@@ -66,8 +70,7 @@ export async function POST(req: Request) {
       ]);
 
       if (insertError) {
-        console.error("[signup] business insert error:", insertError);
-        // We don't throw yet, maybe the user already exists or something
+        console.warn("[signup] business insert might have failed (expected if verification required):", insertError.message);
       } else {
         console.log("[signup] Business created successfully:", createdSlug);
       }

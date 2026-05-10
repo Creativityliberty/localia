@@ -29,8 +29,34 @@ export async function getCurrentBusiness(userId: string): Promise<Business> {
     .limit(1);
 
   const rows = Array.isArray(result?.data) ? result.data : result?.data ? [result.data] : [];
+  
   if (rows.length === 0) {
-    throw new ApiError("BUSINESS_NOT_FOUND", "Aucun commerce trouvé pour cet utilisateur.", 404);
+    // AUTO-HEAL: Si aucun commerce n'existe, on en crée un par défaut
+    // pour éviter de bloquer l'utilisateur sur le dashboard.
+    console.log(`[ownership] No business found for user ${userId}, auto-creating...`);
+    
+    // On essaye de récupérer l'email du user via auth pour le nom par défaut
+    const { data: userData } = await (client as any).auth.getCurrentUser();
+    const email = userData?.user?.email || "user@example.com";
+    const defaultName = email.split("@")[0] || "Mon Commerce";
+    const slug = `${slugify(defaultName)}-${Math.random().toString(36).slice(2, 6)}`;
+
+    const { data: newBusiness, error: createError } = await db.from(TABLES.businesses).insert([
+      {
+        owner_id: userId,
+        name: defaultName,
+        slug: slug,
+        category: "OTHER",
+        email: email,
+      }
+    ]).select().single();
+
+    if (createError || !newBusiness) {
+      console.error("[ownership] Auto-create business failed:", createError);
+      throw new ApiError("BUSINESS_NOT_FOUND", "Aucun commerce trouvé et la création automatique a échoué.", 404);
+    }
+
+    return mapBusiness(newBusiness);
   }
 
   return mapBusiness(rows[0]);

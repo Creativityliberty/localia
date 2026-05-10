@@ -39,7 +39,9 @@ export async function POST(req: NextRequest) {
 
     // 2. Créer le commerce s'il n'existe pas (et si on a le nom)
     if (user?.id && businessName) {
-      const db = (client as any).database || client;
+      // CRITIQUE : Il faut utiliser le token qu'on vient de recevoir pour avoir les droits d'insertion
+      const authClient = createInsforgeServerClient({ accessToken });
+      const db = (authClient as any).database || authClient;
 
       // On vérifie si un commerce existe déjà pour cet utilisateur
       const { data: existing } = await db.from(TABLES.businesses)
@@ -51,7 +53,7 @@ export async function POST(req: NextRequest) {
         const baseSlug = slugify(businessName) || "mon-commerce";
         const slug = `${baseSlug}-${Math.random().toString(36).slice(2, 6)}`;
         
-        await db.from(TABLES.businesses).insert([
+        const { error: insertError } = await db.from(TABLES.businesses).insert([
           {
             owner_id: user.id,
             name: businessName,
@@ -61,7 +63,11 @@ export async function POST(req: NextRequest) {
           },
         ]);
 
-        console.log("[verify] Business created for user:", user.id);
+        if (insertError) {
+          console.error("[verify] Business insert failed:", insertError);
+        } else {
+          console.log("[verify] Business created for user:", user.id);
+        }
       }
     }
 
