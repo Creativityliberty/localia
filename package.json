@@ -1,0 +1,51 @@
+{
+  "name": "localia",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Localia — Le mini-système client des commerces locaux. Mini-site + funnel + QR + fidélité.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "verify": "pnpm run typecheck && pnpm run lint && pnpm run build",
+    "insforge": "pnpm dlx @insforge/cli",
+    "insforge:link": "pnpm dlx @insforge/cli link"
+  },
+  "dependencies": {
+    "@google/genai": "^1.17.0",
+    "@hookform/resolvers": "^5.2.1",
+    "@insforge/sdk": "^1.2.7",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "geist": "^1.5.1",
+    "html5-qrcode": "^2.3.8",
+    "lucide-react": "^0.553.0",
+    "next": "^15.5.7",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "recharts": "^3.8.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.5.0",
+    "zustand": "^5.0.13"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^24.9.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.21.0",
+    "eslint-config-next": "^15.2.2",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}

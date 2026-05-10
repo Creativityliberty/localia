@@ -1,0 +1,22 @@
+0 verbose cli /Users/NUMTEMA/.nvm/versions/node/v24.5.0/bin/node /Users/NUMTEMA/.nvm/versions/node/v24.5.0/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.5.1
+2 info using node@v24.5.0
+3 silly config load:file:/Users/NUMTEMA/.nvm/versions/node/v24.5.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/NUMTEMA/Downloads/localia/.npmrc
+5 silly config load:file:/Users/NUMTEMA/.npmrc
+6 silly config load:file:/Users/NUMTEMA/.nvm/versions/node/v24.5.0/etc/npmrc
+7 verbose title npm exec skills add https://github.com/vercel-labs/skills --skill find-skills -g -y
+8 verbose argv "exec" "--" "skills" "add" "https://github.com/vercel-labs/skills" "--skill" "find-skills" "-g" "-y"
+9 verbose logfile logs-max:10 dir:/Users/NUMTEMA/Downloads/localia/.npm-cache/_logs/2026-05-09T22_26_06_151Z-
+10 verbose logfile /Users/NUMTEMA/Downloads/localia/.npm-cache/_logs/2026-05-09T22_26_06_151Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 http fetch GET 200 https://registry.npmjs.org/skills 1215ms (cache revalidated)
+14 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+15 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+16 verbose cwd /Users/NUMTEMA/Downloads/localia
+17 verbose os Darwin 22.6.0
+18 verbose node v24.5.0
+19 verbose npm  v11.5.1
+20 verbose exit 0
+21 info ok

@@ -1,0 +1,328 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================
+ * Localia — Design tokens
+ * Palette : crème + verts tendres
+ * Typo : Fraunces (display) + Geist (body)
+ * ===================================== */
+
+:root {
+  /* Couleurs */
+  --bg: #F4F7F2;
+  --bg-soft: #EEF4EA;
+  --bg-muted: #E5EDDF;
+  --surface: #FFFFFF;
+  --surface-soft: #FBFCF9;
+  --border: #DDE5D8;
+  --border-strong: #B8C7B1;
+
+  --text: #111611;
+  --text-secondary: #5E6B5B;
+  --text-muted: #8B9787;
+  --text-inverse: #F7FBF4;
+
+  --primary: #1B3D0A;
+  --primary-dark: #0A2A05;
+  --accent: #A6FF4D;
+  --accent-strong: #72D91C;
+  --accent-soft: #E7FFD2;
+  --accent-surface: #F0FFE4;
+
+  --success: #2FBF71;
+  --warning: #F4B740;
+  --danger: #E85B5B;
+  --info: #4FA3F7;
+
+  /* Rayons */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-3xl: 44px;
+
+  /* Ombres */
+  --shadow-card: 0 12px 32px rgba(23, 35, 20, 0.08);
+  --shadow-card-hover: 0 18px 44px rgba(23, 35, 20, 0.13);
+  --shadow-shell: 0 28px 80px rgba(10, 18, 12, 0.22);
+  --shadow-glow: 0 12px 28px rgba(166, 255, 77, 0.32);
+  --shadow-soft: 0 4px 16px rgba(23, 35, 20, 0.06);
+}
+
+/* Base body */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--primary-dark);
+  }
+
+  /* Reset boutons natifs */
+  button {
+    font-family: inherit;
+  }
+
+  /* Heading par défaut en serif */
+  h1, h2, h3 {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-feature-settings: "ss01", "ss02";
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =====================================
+ * Composants Localia
+ * ===================================== */
+@layer components {
+  /* Carte standard */
+  .l-card {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .l-card-hover {
+    transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .l-card-hover:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Bouton primaire */
+  .l-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--primary);
+    color: var(--text-inverse);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+
+  .l-btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .l-btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Bouton accent (vert fluo) */
+  .l-btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: var(--accent);
+    color: var(--primary-dark);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .l-btn-accent:hover {
+    background: var(--accent-strong);
+    transform: translateY(-1px);
+  }
+
+  /* Bouton ghost */
+  .l-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    background: transparent;
+    color: var(--text);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .l-btn-ghost:hover {
+    background: var(--bg-soft);
+    border-color: var(--border-strong);
+  }
+
+  /* Input */
+  .l-input {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .l-input:focus {
+    outline: none;
+    border-color: var(--accent-strong);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  /* Label */
+  .l-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* Badge */
+  .l-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--accent-soft);
+    color: var(--primary);
+  }
+
+  .l-badge-warning {
+    background: #FAEEDA;
+    color: #854F0B;
+  }
+
+  .l-badge-danger {
+    background: #FCEBEB;
+    color: #A32D2D;
+  }
+
+  /* Stat card */
+  .l-stat {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+  }
+
+  .l-stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .l-stat-value {
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text);
+    font-feature-settings: "tnum";
+  }
+
+  .l-stat-delta {
+    font-size: 12px;
+    color: var(--success);
+    margin-top: 2px;
+  }
+
+  /* Container app */
+  .l-shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .l-shell-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+}
+
+/* =====================================
+ * Animations utilitaires
+ * ===================================== */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .stagger-1 { animation-delay: 80ms; }
+  .stagger-2 { animation-delay: 160ms; }
+  .stagger-3 { animation-delay: 240ms; }
+  .stagger-4 { animation-delay: 320ms; }
+  .stagger-5 { animation-delay: 400ms; }
+  .stagger-6 { animation-delay: 480ms; }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* =====================================
+ * Scrollbar légère et raffinée
+ * ===================================== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

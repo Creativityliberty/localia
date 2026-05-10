@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@insforge/install": "^0.0.53"
+  },
+  "_npx": {
+    "packages": [
+      "@insforge/install"
+    ]
+  }
+}
